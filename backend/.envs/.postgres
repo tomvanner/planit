@@ -1,0 +1,5 @@
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=planit
+POSTGRES_USER=planit_user
+POSTGRES_PASSWORD=planit_password
