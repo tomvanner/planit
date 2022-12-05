@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from .rooms import router as rooms_router
 from . import config
 
 
@@ -13,3 +14,5 @@ def get_app() -> FastAPI:
 
 
 app = get_app()
+
+app.include_router(rooms_router.router)
