@@ -11,3 +11,17 @@ services:
       - 8000:8000
     env_file:
       - .env
+  
+  postgres:
+    image: postgres:15.2-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=app
+      - POSTGRES_DB=app_db
+
+volumes:
+  postgres_data: {}

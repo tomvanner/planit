@@ -4,6 +4,14 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PYTHONIOENCODING=utf-8
 
+RUN apt-get update && apt-get install --no-install-recommends -y \
+  # psycopg dependencies
+  build-essential \
+  libpq-dev \
+  # pytest-postgres dependencies
+  python3-dev \
+  postgresql
+
 COPY ./requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /tmp/requirements.txt
 
