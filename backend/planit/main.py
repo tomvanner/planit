@@ -1,9 +1,31 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 
+from planit.database import session_manager
+from planit.config import app_config, settings
 
-app = FastAPI()
+
+def init_app(use_db=True):
+    lifespan = None
+
+    if use_db:
+        session_manager.init(settings.DATABASE_URL)
+
+        @asynccontextmanager
+        async def lifespan(app: FastAPI):
+            yield
+            if session_manager._engine is not None:
+                await session_manager.close()
+
+    app = FastAPI(**app_config, lifespan=lifespan)
+
+    return app
 
 
-@app.get("/")
+app = init_app()
+
+
+@app.get("/health")
 async def root():
-    return {"message": "Root"}
+    return {"status": "ok"}
