@@ -54,6 +54,7 @@ async def create_tables(connection_test):
     async with session_manager.connect() as connection:
         await session_manager.drop_all(connection)
         await session_manager.create_all(connection)
+    yield
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -63,3 +64,4 @@ async def session_override(app, connection_test):
             yield session
 
     app.dependency_overrides[get_db] = get_db_override
+    yield
