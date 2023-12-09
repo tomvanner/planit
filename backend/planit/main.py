@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 from planit.database import session_manager
 from planit.config import app_config, settings
+from planit.users.router import router as user_router
 
 
 def init_app(use_db=True):
@@ -19,6 +20,7 @@ def init_app(use_db=True):
                 await session_manager.close()
 
     app = FastAPI(**app_config, lifespan=lifespan)
+    app.include_router(user_router, prefix="/users", tags=["user"])
 
     return app
 

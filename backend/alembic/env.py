@@ -10,6 +10,7 @@ from alembic import context
 from planit.config import settings
 from planit.database import Base
 from planit.models import *
+from planit.users.models import *
 
 
 config = context.config
