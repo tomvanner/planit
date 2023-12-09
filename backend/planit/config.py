@@ -1,6 +1,7 @@
 from typing import Any
 
-from pydantic import BaseSettings, PostgresDsn
+from pydantic import PostgresDsn
+from pydantic_settings import BaseSettings
 
 from planit.constants import Environment
 
